@@ -23,6 +23,7 @@ translations = {
 }
 
 timestamp = int(time.time())
+now = datetime.fromtimestamp(timestamp).strftime('%d-%b %H:%M')
 twodays = timestamp - (60 * 60 * 24 * 2) # last 48 hours
 
 connection = sqlite3.connect('plot.sqlite')
@@ -53,4 +54,4 @@ for version in realms.iteritems():
 jinja_env = Environment(trim_blocks=True, lstrip_blocks=True)
 jinja_env.loader = FileSystemLoader('.')
 template = jinja_env.get_template('chart.html')
-print template.render(charts=html_charts, realms=realms, translations=translations)
+print template.render(charts=html_charts, realms=realms, translations=translations, now=now)
