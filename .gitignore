@@ -1,2 +1,3 @@
 *.pyc
-plot.sqlite
+*.sqlite
+log.txt

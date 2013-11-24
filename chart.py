@@ -22,7 +22,8 @@ translations = {
     'Warsong': u'Warsong x∞',
 }
 
-timestamp = int(time.time())
+timediff = -(60 * 60)
+timestamp = int(time.time()) + timediff
 now = datetime.fromtimestamp(timestamp).strftime('%d-%b %H:%M')
 twodays = timestamp - (60 * 60 * 24 * 2) # last 48 hours
 
@@ -44,7 +45,7 @@ for version in realms.iteritems():
     store = OrderedDict({})
     for name in users:
         for item in users[name]:
-            alt_key = datetime.fromtimestamp(item[0]).strftime('%d-%b %H:%M')
+            alt_key = datetime.fromtimestamp(item[0] + timediff).strftime('%d-%b %H:%M:%S')
             keylist = store.get(alt_key, [])
             keylist.append((name, item[1], item[2]))
             store[alt_key] = keylist
