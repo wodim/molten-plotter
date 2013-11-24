@@ -20,9 +20,9 @@ the following schema:
 
 Then, you should set up two cron jobs, one for fetching the data and the
 other one for generating the html report file. For example, I fetch the
-data every 5 minutes and generate a new report every hour.
+data every 2 minutes and then generate a new report.
 
-    0,5,10,15,20,25,30,35,40,45,50,55 * * * * (cd /home/wodim/molten-plotter/ && python2 plot.py)
-    0 */1 * * * (cd /home/wodim/molten-plotter/ && python2 chart.py > /home/http/vortigaunt.net/molten-plotter/index.html)
+    */2 * * * * (cd /home/wodim/molten-plotter/ && python2 plot.py &>> log.txt)
+    */2 * * * * (cd /home/wodim/molten-plotter/ && python2 chart.py &> /home/http/vortigaunt.net/molten-plotter/index.html)
 
-You can see the results here: [http://vortigaunt.net/molten-plotter/]
+You can see the results here: http://vortigaunt.net/molten-plotter/
