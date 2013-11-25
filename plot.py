@@ -32,7 +32,7 @@ for realm in realms.iteritems():
     users_queued = 0
 
     try:
-        players = soup.find(id=realm[0]).find(class_='players').get_text()
+        players = soup.find(id=realm[0]).find(class_='players').get_text(strip=True)
 
         re_no_queue = re.compile(r'^(\d+) players online$')
         re_with_queue = re.compile(r'^(\d+) players (\d+) queue$')
