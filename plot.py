@@ -32,7 +32,7 @@ for realm in realms.iteritems():
     users_queued = 0
 
     try:
-        players = soup.find(id=realm[0]).find(class_='players').find('span').get_text()
+        players = soup.find(id=realm[0]).find(class_='players').get_text()
 
         re_no_queue = re.compile(r'^(\d+) players online$')
         re_with_queue = re.compile(r'^(\d+) players (\d+) queue$')
@@ -45,11 +45,12 @@ for realm in realms.iteritems():
         elif with_queue != []:
             users_online = with_queue[0][0]
             users_queued = with_queue[0][1]
+        else:
+            pass # 0/0
     except:
         pass # 0/0 players (server unavailable)
 
     realm = realm[1]
-    print '{realm}: {users_online} players connected and {users_queued} players in queue'.format(realm=realm, users_online=users_online, users_queued=users_queued)
 
     cursor.execute('INSERT INTO plot (timestamp, realm, users_online, users_queued) VALUES (?, ?, ?, ?)',
         (timestamp, realm, users_online, users_queued))
