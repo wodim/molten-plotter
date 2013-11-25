@@ -35,20 +35,20 @@ html_charts = OrderedDict({})
 for version in realms.iteritems():
     # cata or wotlk
     users = {}
-    for realm in version[1]:
+    for realm_name in version[1]:
         # each one of the realms
-        users[realm] = []
-        cursor.execute('SELECT timestamp, users_online, users_queued FROM plot WHERE timestamp > ? AND realm = ?', (twodays, realm))
+        users[realm_name] = []
+        cursor.execute('SELECT timestamp, users_online, users_queued FROM plot WHERE timestamp > ? AND realm = ?', (twodays, realm_name))
         for sample in cursor.fetchall():
-            users[realm].append(sample)
+            users[realm_name].append(sample)
 
     # resort the list of dicts of tuples of lists of tuples of lists of lists
     store = OrderedDict({})
-    for name in users:
-        for item in users[name]:
+    for realm_name in version[1]:
+        for item in users[realm_name]:
             alt_key = datetime.fromtimestamp(item[0] + timediff).strftime('%d-%b %H:%M:%S')
             keylist = store.get(alt_key, [])
-            keylist.append((name, item[1], item[2]))
+            keylist.append((realm_name, item[1], item[2]))
             store[alt_key] = keylist
 
     html_charts[version[0]] = store
