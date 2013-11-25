@@ -4,6 +4,7 @@ from jinja2 import Template, Environment, FileSystemLoader
 import sqlite3
 import time
 import sys
+import re
 from collections import OrderedDict
 from datetime import datetime
 
@@ -55,4 +56,8 @@ for version in realms.iteritems():
 jinja_env = Environment(trim_blocks=True, lstrip_blocks=True)
 jinja_env.loader = FileSystemLoader('.')
 template = jinja_env.get_template('chart.html')
-print template.render(charts=html_charts, realms=realms, translations=translations, now=now)
+output = template.render(charts=html_charts, realms=realms, translations=translations, now=now)
+# minify
+output = re.sub(r'\r|\n|\s{2,}', '', output)
+
+print output
