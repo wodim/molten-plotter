@@ -35,7 +35,7 @@ for realm in realms.iteritems():
         players = soup.find(id=realm[0]).find(class_='players').get_text(strip=True)
 
         re_no_queue = re.compile(r'^(\d+) players online$')
-        re_with_queue = re.compile(r'^(\d+) players (\d+) queue$')
+        re_with_queue = re.compile(r'^(\d+) players(\d+) queue$')
 
         no_queue = re.findall(re_no_queue, players)
         with_queue = re.findall(re_with_queue, players)
