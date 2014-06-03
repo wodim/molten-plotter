@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Molten: players online in the last 48 hours</title>
+        <title>Molten: players online in the last 7 days</title>
         <script src="https://www.google.com/jsapi"></script>
         <meta name="description" content="Charts with an evolution of the number of players online on all Molten realms." />
         <meta name="keywords" content="charts, graphics, molten, molten-wow, players, world of warcraft, molten realms, players online,
@@ -69,8 +69,9 @@
             }
         </script>
 
-        <h1>Molten: players online in the last 48 hours</h1>
-        <h2>Last update: {{ now }}</h2>
+        <h1>Molten: players online in the last 7 days</h1>
+        <h2>Last update: {{ now }} — Server time</h2>
+        {# <h2>(This chart is now empty since Molten has decided to start showing their population numbers only to premium users, i.e., those who pay to win)</h2> #}
 {% for chart in charts.keys() %}
         <div id="{{ chart }}_chart_div" style="width: 1200px; height: 500px;"></div>
 {% endfor %}

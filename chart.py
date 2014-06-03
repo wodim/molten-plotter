@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from jinja2 import Template, Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader
 import sqlite3
 import time
-import sys
 import re
 from collections import OrderedDict
 from datetime import datetime
@@ -15,18 +14,18 @@ realms = {
 
 translations = {
     'Lordaeron': 'Lordaeron x1',
-    'Deathwing': 'Deathwing x12',
-    'Ragnaros': 'Ragnaros x20',
+    'Deathwing': 'Deathwing x5',
+    'Ragnaros': 'Ragnaros x10',
     'Frostwolf': 'Frostwolf x3',
-    'Neltharion': 'Neltharion x12',
-    'Sargeras': 'Sargeras x20',
+    'Neltharion': 'Neltharion x5',
+    'Sargeras': 'Sargeras x10',
     'Warsong': u'Warsong x∞',
 }
 
 timediff = -(60 * 60)
 timestamp = int(time.time()) + timediff
-now = datetime.fromtimestamp(timestamp).strftime('%d-%b %H:%M')
-twodays = timestamp - (60 * 60 * 24 * 2) # last 48 hours
+now = datetime.fromtimestamp(timestamp).strftime('%a %d-%b %H:%M')
+twodays = timestamp - (60 * 60 * 24 * 7) # last 7 days
 
 connection = sqlite3.connect('plot.sqlite')
 cursor = connection.cursor()
@@ -46,7 +45,7 @@ for version in realms.iteritems():
     store = OrderedDict({})
     for realm_name in version[1]['realms']:
         for item in users[realm_name]:
-            alt_key = datetime.fromtimestamp(item[0] + timediff).strftime('%d-%b %H:%M:%S')
+            alt_key = datetime.fromtimestamp(item[0] + timediff).strftime('%a %d-%b %H:%M:%S')
             keylist = store.get(alt_key, [])
 
             users_online = item[1]
