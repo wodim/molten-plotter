@@ -14,6 +14,7 @@ realms = {
     'rb1': 'Neltharion',
     'rb3': 'Sargeras',
     'rb5': 'Warsong',
+    'rb8': 'Stormstout',
 }
 
 connection = sqlite3.connect('plot.sqlite')
