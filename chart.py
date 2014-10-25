@@ -8,9 +8,9 @@ from collections import OrderedDict
 from datetime import datetime
 
 realms = OrderedDict([
-    ('WotLK', {'capacity': 4500, 'realms': ('Lordaeron', 'Deathwing', 'Ragnaros')}),
-    ('Cataclysm', {'capacity': 3500, 'realms': ('Frostwolf', 'Neltharion', 'Sargeras', 'Warsong')}),
-    ('MoP', {'capacity': 1000, 'realms': ('Stormstout',)}),
+    ('WotLK', {'capacity': 4500, 'realms': ('Lordaeron', 'Deathwing', 'Ragnaros',)}),
+    ('Cataclysm', {'capacity': 3500, 'realms': ('Frostwolf', 'Neltharion', 'Sargeras', 'Warsong',)}),
+    ('MoP', {'capacity': 3500, 'realms': ('Stormstout',)}),
 ])
 
 translations = {
@@ -21,7 +21,7 @@ translations = {
     'Neltharion': 'Neltharion x5',
     'Sargeras': 'Sargeras x10',
     'Warsong': u'Warsong x∞',
-    'Stormstout': 'Stormstout x?',
+    'Stormstout': 'Stormstout x5',
 }
 
 timediff = -(60 * 60)
