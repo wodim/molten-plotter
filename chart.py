@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from jinja2 import Environment, FileSystemLoader
-import sqlite3
-import time
 import re
+import time
+import sqlite3
 from collections import OrderedDict
 from datetime import datetime
 
+from jinja2 import Environment, FileSystemLoader
+
 realms = OrderedDict([
-    ('WotLK', {'capacity': 4500, 'realms': ('Lordaeron', 'Deathwing', 'Ragnaros',)}),
-    ('Cataclysm', {'capacity': 3500, 'realms': ('Frostwolf', 'Neltharion', 'Sargeras', 'Warsong',)}),
-    ('MoP', {'capacity': 3500, 'realms': ('Stormstout', 'Hellscream',)}),
+    ('WotLK', {'capacity': 3500, 'max': 4000, 'realms': ('Lordaeron', 'Deathwing', 'Ragnaros',)}),
+    ('Cataclysm', {'capacity': 3500, 'max': 4000, 'realms': ('Frostwolf', 'Neltharion', 'Sargeras', 'Warsong',)}),
+    ('MoP', {'capacity': 3500, 'max': 4500, 'realms': ('Stormstout', 'Hellscream',)}),
 ])
 
 translations = {
@@ -53,6 +54,9 @@ for version in realms.iteritems():
 
             users_online = item[1]
             users_queued = item[2]
+            if version[0] == 'WotLK' and users_online:
+                users_online -= 1000
+
             # if a realm is full or empty, don't draw a line for online users
             if users_online >= version[1]['capacity'] or users_online == 0:
                 users_online = 'null'
